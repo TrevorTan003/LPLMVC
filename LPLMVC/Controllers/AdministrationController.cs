@@ -151,6 +151,8 @@ namespace LPLMVC.Controllers
                 {
                     userRoleModel.IsSelected = false;
                 }
+
+                model.Add(userRoleModel);
             }
 
             return View(model);
