@@ -1,0 +1,24 @@
+﻿@model UserRoleModel
+
+@{
+    ViewBag.Title = "Users In Role";
+}
+
+<form>
+    <div class="card">
+        <div class="card-header">
+            <h5>Add or remove users from this role</h5>
+        </div>
+        <div class="card-body">
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <div class="form-check m-1">
+                    <input asp-for="@Model.[i].IsSelected" class="form-check" />
+                </div>
+            }
+        </div>
+        <div class="card-footer">
+
+        </div>
+    </div>
+</form>
