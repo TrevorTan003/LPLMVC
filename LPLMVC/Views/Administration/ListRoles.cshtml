@@ -8,7 +8,11 @@
 
 @if (Model.Any())
 {
-    foreach(var role in Model)
+<div class="card-body">
+    <a class="text-light btn btn-primary" asp-action="CreateRole" asp-controller="Administration">Add Role</a>
+</div>
+
+    foreach (var role in Model)
     {
         <div class="card">
             <div class="card-header">
@@ -23,6 +27,7 @@
                 <a class="btn btn-danger text-light">Delete</a>
             </div>
         </div>
+        <br />
     }
 }
 else
