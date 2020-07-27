@@ -8,15 +8,15 @@
 
 @if (Model.Any())
 {
-<div class="card-body">
     <a class="text-light btn btn-primary" asp-action="CreateRole" asp-controller="Administration">Add Role</a>
-</div>
+    <hr />
+    <br />
 
     foreach (var role in Model)
     {
         <div class="card">
             <div class="card-header">
-                Roles
+                Role:
             </div>
             <div class="card-body">
                 <h5 class="card-title">@role.Name</h5>
