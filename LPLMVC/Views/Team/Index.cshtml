@@ -1,0 +1,58 @@
+﻿@model IEnumerable<LPLMVC.Models.TeamDataModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SchoolName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Wins)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Games)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SchoolName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Wins)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Games)
+            </td>
+            <td>
+                @if (User.IsInRole("User, Admin"))
+                {
+                    <a asp-action="Edit" asp-route-id="@item.TeamId">Edit  |</a>
+                }
+                else if (User.IsInRole("Admin"))
+                {
+                    <a asp-action="Delete" asp-route-id="@item.TeamId">Delete  |</a>
+                }
+
+            <a asp-action="Details" asp-route-id="@item.TeamId">Details</a>
+
+
+
+
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -7,6 +7,18 @@
     "mssql2": {
       "type": "mssql.local",
       "connectionId": "LPLTeamsContext"
+    },
+    "mssql3": {
+      "type": "mssql.local",
+      "connectionId": "LPLTeamContext"
+    },
+    "mssql4": {
+      "type": "mssql.local",
+      "connectionId": "LPLTeamDetailsContext"
+    },
+    "mssql5": {
+      "type": "mssql.local",
+      "connectionId": "TeamDetailsContext"
     }
   }
 }

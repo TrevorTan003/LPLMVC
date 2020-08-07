@@ -10,6 +10,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using LPLMVC.Data;
+using LPLMVC.Models;
+using Microsoft.Extensions.Options;
 
 namespace LPLMVC
 {
@@ -29,7 +31,7 @@ namespace LPLMVC
             services.AddRazorPages();
 
             services.AddDbContext<LPLTeamsContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("LPLTeamsContext")));
+                    options.UseSqlServer(Configuration.GetConnectionString("LPLMVCContextConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

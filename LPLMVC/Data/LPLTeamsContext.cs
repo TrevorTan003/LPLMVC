@@ -14,6 +14,6 @@ namespace LPLMVC.Data
         {
         }
 
-        public DbSet<LPLMVC.Models.Teams> Teams { get; set; }
+        public DbSet<LPLMVC.Models.TeamDataModel> TeamDataModels { get; set; }
     }
 }
