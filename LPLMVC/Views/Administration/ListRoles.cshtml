@@ -22,7 +22,7 @@
                 <h5 class="card-title">Role Name: @role.Name</h5>
             </div>
             <div class="card-footer">
-                <form asp-action="DeleteRole" asp-route-roleId="@role.Id" method="post">
+                <form asp-action="DeleteRole" asp-route-id="@role.Id" method="post">
                     <a class="btn btn-primary" asp-action="EditRole"
                        asp-controller="Administration" asp-route-id="@role.Id">Edit Role</a>
 
@@ -58,4 +58,8 @@ else
             </div>
         </div>
     </div>
+}
+
+@section Scripts{
+    <script src="~/js/DeleteScript.js"></script>
 }
