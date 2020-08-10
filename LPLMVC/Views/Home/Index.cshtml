@@ -10,25 +10,31 @@
     </ol>
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img class="d-block w-100" src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/blog/play/dota_heroes.png" style="width:1000px; height:500px" alt="First slide">
-            <div class="carousel-caption d-none d-md-block">
-                <h5 class="text-light">Bruh</h5>
-                <p class="text-light">Bruh Moment</p>
-            </div>
+            <a href="#Details">
+                <img class="d-block w-100" src="https://i.imgur.com/nMPK14n.png" style="width:1000px; height:500px" alt="First slide">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5 class="text-light">Be in to win $3700 AUD</h5>
+                    <p class="text-light">This year's competition is a step up from last year's, we have a prize pool of $3700 AUD and the tournament will be fiercer than ever before.</p>
+                </div>
+            </a>
         </div>
         <div class="carousel-item">
-            <img class="d-block w-100" src="https://i.insider.com/5b7e9f3089c8a1d9218b48b6?width=1100&format=jpeg&auto=webp" style="width:1000px; height:500px" alt="Second slide">
-            <div class="carousel-caption d-none d-md-block">
-                <h5 class="text-light">Bruh</h5>
-                <p class="text-light">Bruh Moment</p>
-            </div>
+            <a href="#About">
+                <img class="d-block w-100" src="https://i.insider.com/5b7e9f3089c8a1d9218b48b6?width=1100&format=jpeg&auto=webp" style="width:1000px; height:500px" alt="Second slide">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5 class="text-light">Go Pro</h5>
+                    <p class="text-light">The winning team will continue to go up against the best highschools from all across Australia. Fight hard and you'll reap more rewards and gain recognition from professional teams.</p>
+                </div>
+            </a>
         </div>
         <div class="carousel-item">
-            <img class="d-block w-100" src="https://i.imgur.com/nMPK14n.png" style="width:1000px; height:500px" alt="Third slide">
-            <div class="carousel-caption d-none d-md-block">
-                <h5 class="text-light">Bruh</h5>
-                <p class="text-light">Bruh Moment</p>
-            </div>
+            <a href="#Rules">
+                <img class="d-block w-100" src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/blog/play/dota_heroes.png" style="width:1000px; height:500px" alt="Third slide">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5 class="text-light">Rules</h5>
+                    <p class="text-light">Make sure you and your team follows the tournament's rules. Failure to do so may result in disqualification.</p>
+                </div>
+            </a>
         </div>
     </div>
     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -43,19 +49,43 @@
 <br />
 <div class="flex-sm-row-reverse card">
     <div class="card-body">
-        <h3 class="text-dark text-center"><u><b>2020 LPL Dota 2 Tournament</b></u></h3>
-        <p class="text-dark">
-            LPL invites you and your school to participate in this year's Dota 2 Tournament. To enter the tournament you're required to register and add your team
-            to the tournament. There will be a maximum of 20 teams so be sure to apply quickly. By competing in this tournament you and your team will have a chance of winning
-            prizes and the team that achieves first place will continue to play against schools all across Australia for the chance to win $3700 AUD.
-        </p>
-        <br />
-        <div>
-            <h3 class="text-dark text-center"><u><b>Tournament Details:</b></u></h3>
-            <p class="text-dark">LOL</p>
-
+        <div id="About">
+            <h3 class="text-dark"><b>2020 LPL Dota 2 Tournament</b></h3>
+            <p class="text-dark">
+                LPL welcomes you and your school to participate in this year's Dota 2 Tournament. To enter the tournament you're required to register your account and add your team
+                to the tournament. There will be a maximum of 20 teams so be sure to apply quickly. By competing in this tournament you and your team will have a chance of winning
+                prizes and the team that achieves first place will continue to play against schools all across Australia for the chance to win $3700 AUD.
+            </p>
+            <br />
+            <hr />
+        </div>
+        <div id="Details">
+            <h3 class="text-dark"><b>Tournament Details:</b></h3>
+            <p class="text-dark"></p>
+            <table class="table table-sm flex-sm-grow-0 col-sm-11">
+                <thead>
+                    <tr>
+                        <th scope="col">Placement</th>
+                        <th scope="col">Prize</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>$2500</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>$700</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>$500</td>
+                    </tr>
+                </tbody>
+            </table>
             <div class="container text-center align-content-center" style="width:500px">
-                <a asp-action="Index" asp-controller="Team" class="btn btn-danger text-light">Register Your Team</a>
+                <a asp-action="Index" asp-controller="Team" class="btn btn-primary text-light">Register Your Team</a>
             </div>
             <br />
         </div>
