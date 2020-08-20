@@ -30,6 +30,32 @@ namespace LPLMVC.Controllers
             return View(users);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> EditUser(string id)
+        {
+            var user = await userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                ViewBag.ErrorMessaage = $"User with Id = {id} cannot be found";
+                return View("NotFound");
+            }
+
+            //Returns us the list of user claims and roles
+            var userClaims = await userManager.GetClaimsAsync(user);
+            var userRoles = await userManager.GetRolesAsync(user);
+
+            var model = new EditUserModel
+            {
+                Id = user.Id,
+                Email = user.Email,
+                UserName = user.UserName,
+                Claims = userClaims.Select(c => c.Value).ToList(),
+                Roles = userRoles
+            };
+
+            return View(model);
+        }
+
         [HttpPost]
         public async Task<IActionResult> DeleteUser(string id)
         {

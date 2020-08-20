@@ -3,14 +3,16 @@ using LPLMVC.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LPLMVC.Migrations.LPLTeams
 {
     [DbContext(typeof(LPLTeamsContext))]
-    partial class LPLTeamsContextModelSnapshot : ModelSnapshot
+    [Migration("20200819022141_Home-LPLTeams")]
+    partial class HomeLPLTeams
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
