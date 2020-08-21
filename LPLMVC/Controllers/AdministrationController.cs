@@ -24,6 +24,77 @@ namespace LPLMVC.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> ManageUserRoles(string userId)
+        {
+            ViewBag.userId = userId;
+
+            var user = await userManager.FindByIdAsync(userId);
+
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"User with Id = {userId} cannot be found";
+                return View("NotFound");
+            }
+
+            var model = new List<UsersRolesModel>();
+
+            foreach (var role in roleManager.Roles)
+            {
+                var userRolesViewModel = new UsersRolesModel
+                {
+                    RoleId = role.Id,
+                    RoleName = role.Name
+                };
+
+                if (await userManager.IsInRoleAsync(user, role.Name))
+                {
+                    userRolesViewModel.IsSelected = true;
+                }
+                else
+                {
+                    userRolesViewModel.IsSelected = false;
+                }
+
+                model.Add(userRolesViewModel);
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult>
+            ManageUserRoles(List<UsersRolesModel> model, string userId)
+        {
+            var user = await userManager.FindByIdAsync(userId);
+
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"User with Id = {userId} cannot be found";
+                return View("NotFound");
+            }
+
+            var roles = await userManager.GetRolesAsync(user);
+            var result = await userManager.RemoveFromRolesAsync(user, roles);
+
+            if (!result.Succeeded)
+            {
+                ModelState.AddModelError("", "Cannot remove user existing roles");
+                return View(model);
+            }
+
+            result = await userManager.AddToRolesAsync(user,
+                model.Where(x => x.IsSelected).Select(y => y.RoleName));
+
+            if (!result.Succeeded)
+            {
+                ModelState.AddModelError("", "Cannot add selected roles to user");
+                return View(model);
+            }
+
+            return RedirectToAction("EditUser", new { Id = userId });
+        }
+
+        [HttpGet]
         public IActionResult ListUsers()
         {
             var users = userManager.Users;
@@ -255,11 +326,11 @@ namespace LPLMVC.Controllers
                 return View("NotFound");
             }
 
-            var model = new List<UserRoleModel>();
+            var model = new List<RolesUsersModel>();
 
             foreach(var user in userManager.Users)
             {
-                var userRoleModel = new UserRoleModel
+                var userRoleModel = new RolesUsersModel
                 {
                     UserId = user.Id,
                     UserName = user.UserName
@@ -282,7 +353,7 @@ namespace LPLMVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditUsersInRole(List<UserRoleModel> model, string roleId)
+        public async Task<IActionResult> EditUsersInRole(List<RolesUsersModel> model, string roleId)
         {
             var role = await roleManager.FindByIdAsync(roleId);
 

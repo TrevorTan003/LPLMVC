@@ -8,8 +8,9 @@
 
 @if (Model.Any())
 {
-    <a class="text-light btn btn-primary" asp-action="CreateRole" asp-controller="Administration">Add Role</a>
+
     <hr />
+    <a class="text-light btn btn-primary" asp-action="CreateRole" asp-controller="Administration">Add Role</a>
     <br />
 
     foreach (var role in Model)
