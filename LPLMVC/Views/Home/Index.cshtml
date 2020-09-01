@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<LPLMVC.Models.TeamDataModel>  
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -85,7 +87,7 @@
                 </tbody>
             </table>
             <div class="container text-center align-content-center" style="width:500px">
-                <a asp-action="Index" asp-controller="Team" class="btn btn-primary text-light">Register Your Team</a>
+                <a asp-action="Index" asp-controller="Team" class="btn btn-primary text-light">View Teams</a>
             </div>
             <br />
         </div>
