@@ -85,6 +85,7 @@ namespace LPLMVC.Controllers
 
         // POST: Team/Edit/5
         [Authorize(Roles = "User, Admin")]
+        [Authorize(Policy = "EditTeamPolicy")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("TeamId,SchoolName,Player1,Player2,Player3,Player4,Player5,Player6,Player7,Wins,Games")] TeamDataModel teamDataModel)

@@ -30,8 +30,15 @@ namespace LPLMVC
             services.AddControllersWithViews();
             services.AddRazorPages();
 
+            //DbContext
             services.AddDbContext<LPLTeamsContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("LPLMVCContextConnection")));
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("EditTeamPolicy",
+                    policy => policy.RequireClaim("Edit Team"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
