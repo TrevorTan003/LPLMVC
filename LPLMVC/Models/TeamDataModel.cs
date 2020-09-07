@@ -43,12 +43,7 @@ namespace LPLMVC.Models
         [Column(TypeName = "varchar(250)")]
         [DisplayName("SteamID 5")]
         public string Player5 { get; set; }
-        [Column(TypeName = "varchar(250)")]
-        [DisplayName("SteamID 6")]
-        public string Player6 { get; set; }
-        [Column(TypeName = "varchar(250)")]
-        [DisplayName("SteamID 7")]
-        public string Player7 { get; set; }     
+   
         public int Wins { get; set; }
         public int Games { get; set; }
 

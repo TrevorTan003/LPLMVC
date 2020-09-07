@@ -8,7 +8,7 @@ namespace LPLMVC.Models
 {
     public class ClaimsStore
     {
-        public List<Claim> AllClaims = new List<Claim>()
+        public static List<Claim> AllClaims = new List<Claim>()
         {
             new Claim("Create Team", "Create Team"),
             new Claim("Edit Team", "Edit Team"),
