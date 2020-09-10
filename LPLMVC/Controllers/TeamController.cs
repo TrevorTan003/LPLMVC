@@ -45,14 +45,14 @@ namespace LPLMVC.Controllers
         }
 
         // GET: Team/Create
-        [Authorize(Roles = "User, Admin")]
+        [Authorize(Policy = "CreateTeamPolicy")]
         public IActionResult Create()
         {
             return View();
         }
 
         // POST: Team/Create
-        [Authorize(Roles = "User, Admin")]
+        [Authorize(Policy = "CreateTeamPolicy")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("TeamId,SchoolName,Player1,Player2,Player3,Player4,Player5,Player6,Player7")] TeamDataModel teamDataModel)
@@ -67,7 +67,7 @@ namespace LPLMVC.Controllers
         }
 
         // GET: Team/Edit/5
-        [Authorize(Roles = "User, Admin")]
+        [Authorize(Policy = "EditTeamPolicy")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -84,7 +84,6 @@ namespace LPLMVC.Controllers
         }
 
         // POST: Team/Edit/5
-        [Authorize(Roles = "User, Admin")]
         [Authorize(Policy = "EditTeamPolicy")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -119,7 +118,7 @@ namespace LPLMVC.Controllers
         }
 
         // GET: Team/Delete/5
-        [Authorize(Roles = "Admin")]
+        [Authorize(Policy = "DeleteTeamPolicy")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -138,7 +137,7 @@ namespace LPLMVC.Controllers
         }
 
         // POST: Team/Delete/5
-        [Authorize(Roles = "User, Admin")]
+        [Authorize(Policy = "DeleteTeamPolicy")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

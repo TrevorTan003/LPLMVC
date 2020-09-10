@@ -19,11 +19,12 @@ namespace LPLMVC.Models
         /// 
         [Key]
         public int TeamId { get; set; }
+        // School Name
         [Required]
         [Column(TypeName = "varchar(250)")]
         [DisplayName("School Name")]
         public string SchoolName { get; set; }
-        /// Players In Team
+        // Players In Team (Required)
         [Required]
         [DisplayName("SteamID 1")]
         public string Player1 { get; set; }
@@ -44,7 +45,7 @@ namespace LPLMVC.Models
         public string Player6 { get; set; }
         [DisplayName("SteamID 7")]
         public string Player7 { get; set; }
-        //Only for admins to modify
+        // Only for admins to modify
         public int Wins { get; set; }
         public int Games { get; set; }
 

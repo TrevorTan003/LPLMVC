@@ -34,10 +34,17 @@ namespace LPLMVC
             services.AddDbContext<LPLTeamsContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("LPLMVCContextConnection")));
 
+            //Claims Policy
             services.AddAuthorization(options =>
             {
+                options.AddPolicy("CreateTeamPolicy",
+                    policy => policy.RequireClaim("Create Team"));
+
                 options.AddPolicy("EditTeamPolicy",
                     policy => policy.RequireClaim("Edit Team"));
+
+                options.AddPolicy("DeleteTeamPolicy",
+                    policy => policy.RequireClaim("Delete Team"));
             });
         }
 
