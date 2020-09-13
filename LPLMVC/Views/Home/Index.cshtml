@@ -1,7 +1,6 @@
-﻿@model LPLMVC.Models.TeamDataModel
-
+﻿@model IEnumerable<LPLMVC.Models.TeamDataModel>
 @{
-    ViewData["Title"] = "Home Page";
+
 }
 
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -56,7 +55,7 @@
             <p class="text-dark">
                 LPL welcomes you and your school to participate in this year's Dota 2 Tournament. To enter the tournament you're required to register your account and add your team
                 to the tournament. There will be a maximum of 20 teams so be sure to apply quickly. By competing in this tournament you and your team will have a chance of winning
-                prizes and the team that achieves first place will continue to play against schools all across Australia for the chance to win $ AUD.
+                prizes and the team that achieves first place will continue to play against schools all across Australia for the chance to win $5570 AUD.
             </p>
             <br />
             <hr />
@@ -135,7 +134,58 @@
             <hr />
 
             <h3><b>Tournament Details:</b></h3>
-            
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.SchoolName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Wins)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Games)
+                        </th>
+                        <th>
+                            <a asp-action="Create" class="btn btn-primary text-light">Create New</a>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SchoolName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Wins)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Games)
+                            </td>
+                            <td>
+                                @if (User.IsInRole("User, Admin"))
+                                {
+                                    <a asp-action="Edit" asp-route-id="@item.TeamId">Edit  |</a>
+                                }
+                                else if (User.IsInRole("Admin"))
+                                {
+                                    <a asp-action="Delete" asp-route-id="@item.TeamId">Delete  |</a>
+                                }
+
+                                <a asp-action="Details" asp-route-id="@item.TeamId">Details</a>
+
+
+
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
             <div class="container text-center align-content-center" style="width:500px">
                 <a asp-action="Index" asp-controller="Team" class="btn btn-primary text-light">View Teams</a>
             </div>

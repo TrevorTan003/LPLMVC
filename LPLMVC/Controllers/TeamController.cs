@@ -20,11 +20,6 @@ namespace LPLMVC.Controllers
             _context = context;
         }
 
-        // GET: Team
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.TeamDataModels.ToListAsync());
-        }
 
         // GET: Team/Details/5
         public async Task<IActionResult> Details(int? id)
