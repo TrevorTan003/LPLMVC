@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<LPLMVC.Models.TeamDataModel>
 @{
-
+    ViewBag.Title = "Home";
 }
 
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -148,7 +148,7 @@
                             @Html.DisplayNameFor(model => model.Games)
                         </th>
                         <th>
-                            <a asp-action="Create" class="btn btn-primary text-light">Create New</a>
+                            <a asp-action="Create" asp-controller="Team" class="btn btn-primary text-light">Create New</a>
                         </th>
                     </tr>
                 </thead>
@@ -168,14 +168,14 @@
                             <td>
                                 @if (User.IsInRole("User, Admin"))
                                 {
-                                    <a asp-action="Edit" asp-route-id="@item.TeamId">Edit  |</a>
+                                    <a asp-action="Edit" asp-controller="Team" asp-route-id="@item.TeamId">Edit  |</a>
                                 }
                                 else if (User.IsInRole("Admin"))
                                 {
-                                    <a asp-action="Delete" asp-route-id="@item.TeamId">Delete  |</a>
+                                    <a asp-action="Delete" asp-controller="Team" asp-route-id="@item.TeamId">Delete  |</a>
                                 }
 
-                                <a asp-action="Details" asp-route-id="@item.TeamId">Details</a>
+                                <a asp-action="Details" asp-controller="Team" asp-route-id="@item.TeamId">Details</a>
 
 
 
@@ -186,9 +186,6 @@
                 </tbody>
             </table>
 
-            <div class="container text-center align-content-center" style="width:500px">
-                <a asp-action="Index" asp-controller="Team" class="btn btn-primary text-light">View Teams</a>
-            </div>
         </div>
     </div>
 </div>
