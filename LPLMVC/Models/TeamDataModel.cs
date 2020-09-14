@@ -8,7 +8,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-
 namespace LPLMVC.Models
 {
 
@@ -19,33 +18,37 @@ namespace LPLMVC.Models
         /// 
         [Key]
         public int TeamId { get; set; }
-        // School Name
         [Required]
         [Column(TypeName = "varchar(250)")]
         [DisplayName("School Name")]
         public string SchoolName { get; set; }
-        // Players In Team (Required)
+        /// Players In Team
         [Required]
+        [Column(TypeName = "varchar(250)")]
         [DisplayName("SteamID 1")]
         public string Player1 { get; set; }
         [Required]
+        [Column(TypeName = "varchar(250)")]
         [DisplayName("SteamID 2")]
         public string Player2 { get; set; }
         [Required]
+        [Column(TypeName = "varchar(250)")]
         [DisplayName("SteamID 3")]
         public string Player3 { get; set; }
         [Required]
+        [Column(TypeName = "varchar(250)")]
         [DisplayName("SteamID 4")]
         public string Player4 { get; set; }
         [Required]
+        [Column(TypeName = "varchar(250)")]
         [DisplayName("SteamID 5")]
         public string Player5 { get; set; }
-        //Nullables (Optional)
+        [Column(TypeName = "varchar(250)")]
         [DisplayName("SteamID 6")]
         public string Player6 { get; set; }
+        [Column(TypeName = "varchar(250)")]
         [DisplayName("SteamID 7")]
-        public string Player7 { get; set; }
-        // Only for admins to modify
+        public string Player7 { get; set; }     
         public int Wins { get; set; }
         public int Games { get; set; }
 

@@ -72,9 +72,9 @@
     </dl>
 </div>
 <div>
-    @if (User.HasClaim("Edit Team", "Edit Team"))
+    @if (User.IsInRole("Admin"))
     {
     <a asp-action="Edit" asp-route-id="@Model.TeamId">Edit |</a>
-    }
+}
     <a asp-action="Index">Back to List</a>
 </div>
