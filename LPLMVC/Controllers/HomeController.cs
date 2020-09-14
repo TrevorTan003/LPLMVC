@@ -6,26 +6,21 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using LPLMVC.Models;
-using LPLMVC.Data;
-using Microsoft.EntityFrameworkCore;
 
 namespace LPLMVC.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly LPLTeamsContext _context;
 
-        public HomeController(ILogger<HomeController> logger, LPLTeamsContext context)
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            _context = context;
         }
 
-        // GET: Team
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.TeamDataModels.ToListAsync());
+            return View();
         }
 
         public IActionResult Rules()
