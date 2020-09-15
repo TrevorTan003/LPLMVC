@@ -30,7 +30,7 @@ namespace LPLMVC
             services.AddControllersWithViews();
             services.AddRazorPages();
 
-            //DbContext
+            //DbContext For TeamsContext
             services.AddDbContext<LPLTeamsContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("LPLMVCContextConnection")));
 
