@@ -27,6 +27,7 @@ namespace LPLMVC.Controllers
         [HttpGet]
         public async Task<IActionResult> ManageUserClaims(string userId)
         {
+            //Specify user by Id in the AspNetUsers table
             var user = await userManager.FindByIdAsync(userId);
 
             if (user == null)
@@ -113,8 +114,10 @@ namespace LPLMVC.Controllers
                 return View("NotFound");
             }
 
+            //List the properties of the UsersRolesModel (RoleId, RoleName, IsSelected)
             var model = new List<UsersRolesModel>();
 
+            //Loop through each role we have in the application
             foreach (var role in roleManager.Roles)
             {
                 var userRolesViewModel = new UsersRolesModel
@@ -150,6 +153,7 @@ namespace LPLMVC.Controllers
                 return View("NotFound");
             }
 
+            // Get all the user existing roles and delete them
             var roles = await userManager.GetRolesAsync(user);
             var result = await userManager.RemoveFromRolesAsync(user, roles);
 
@@ -159,6 +163,7 @@ namespace LPLMVC.Controllers
                 return View(model);
             }
 
+            // Add all the roles that are selected on the UI
             result = await userManager.AddToRolesAsync(user,
                 model.Where(x => x.IsSelected).Select(y => y.RoleName));
 
@@ -182,7 +187,7 @@ namespace LPLMVC.Controllers
         [HttpGet]
         public async Task<IActionResult> EditUser(string id)
         {
-            //Find user by Id in the AspNetUsers table
+
             var user = await userManager.FindByIdAsync(id);
             if (user == null)
             {
@@ -242,7 +247,7 @@ namespace LPLMVC.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteUser(string id)
         {
-            //Find user by UserId
+
             var user = await userManager.FindByIdAsync(id);
 
             if (user == null)
@@ -272,7 +277,7 @@ namespace LPLMVC.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteRole(string id)
         {
-            //Find role by RoleID
+            //Find role by RoleId in the AspNetRoles table
             var role = await roleManager.FindByIdAsync(id);
 
             if (role == null)
@@ -346,7 +351,6 @@ namespace LPLMVC.Controllers
         [HttpGet]
         public async Task<IActionResult> EditRole(string id)
         {
-            //Find role by RoleID
             var role = await roleManager.FindByIdAsync(id);
 
             if (role == null)
