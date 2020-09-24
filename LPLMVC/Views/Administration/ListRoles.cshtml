@@ -5,12 +5,11 @@
 }
 
 <h1>All Roles</h1>
+<hr />
 
 @if (Model.Any())
 {
-    <a class="text-light btn btn-primary" asp-action="CreateRole" asp-controller="Administration">Add Role</a>
-    <hr />
-    <br />
+    <a class="text-light btn btn-primary mb-3" asp-action="CreateRole" asp-controller="Administration">Add Role</a>
 
     foreach (var role in Model)
     {
@@ -40,7 +39,6 @@
                 </form>
             </div>
         </div>
-        <br />
     }
 }
 else
