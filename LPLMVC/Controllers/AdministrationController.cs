@@ -27,6 +27,7 @@ namespace LPLMVC.Controllers
         [HttpGet]
         public async Task<IActionResult> ManageUserClaims(string userId)
         {
+            //Specify user by Id in the AspNetUsers table
             var user = await userManager.FindByIdAsync(userId);
 
             if (user == null)
@@ -113,8 +114,10 @@ namespace LPLMVC.Controllers
                 return View("NotFound");
             }
 
+            //List the properties of the UsersRolesModel (RoleId, RoleName, IsSelected)
             var model = new List<UsersRolesModel>();
 
+            //Loop through each role we have in the application
             foreach (var role in roleManager.Roles)
             {
                 var userRolesViewModel = new UsersRolesModel
@@ -150,6 +153,7 @@ namespace LPLMVC.Controllers
                 return View("NotFound");
             }
 
+            // Get all the user existing roles and delete them
             var roles = await userManager.GetRolesAsync(user);
             var result = await userManager.RemoveFromRolesAsync(user, roles);
 
@@ -159,6 +163,7 @@ namespace LPLMVC.Controllers
                 return View(model);
             }
 
+            // Add all the roles that are selected on the UI
             result = await userManager.AddToRolesAsync(user,
                 model.Where(x => x.IsSelected).Select(y => y.RoleName));
 
@@ -178,9 +183,11 @@ namespace LPLMVC.Controllers
             return View(users);
         }
 
+        //Id is passed from the URL to the action
         [HttpGet]
         public async Task<IActionResult> EditUser(string id)
         {
+
             var user = await userManager.FindByIdAsync(id);
             if (user == null)
             {
@@ -204,6 +211,7 @@ namespace LPLMVC.Controllers
             return View(model);
         }
 
+        //This action responds to HttpPost and receives EditUserModel
         [HttpPost]
         public async Task<IActionResult> EditUser(EditUserModel model)
         {
@@ -219,6 +227,7 @@ namespace LPLMVC.Controllers
                 user.Email = model.Email;
                 user.UserName = model.UserName;
 
+                //Update username/email from AspNetUsers table using UpdateAsync
                 var result = await userManager.UpdateAsync(user);
 
                 if (result.Succeeded)
@@ -238,6 +247,7 @@ namespace LPLMVC.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteUser(string id)
         {
+
             var user = await userManager.FindByIdAsync(id);
 
             if (user == null)
@@ -247,6 +257,7 @@ namespace LPLMVC.Controllers
             }
             else
             {
+                //Delete user from AspNetUsers table with DeleteAsync
                 var result = await userManager.DeleteAsync(user);
 
                 if (result.Succeeded)
@@ -266,6 +277,7 @@ namespace LPLMVC.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteRole(string id)
         {
+            //Find role by RoleId in the AspNetRoles table
             var role = await roleManager.FindByIdAsync(id);
 
             if (role == null)
@@ -275,6 +287,7 @@ namespace LPLMVC.Controllers
             }
             else
             {
+                //Remove role from AspNetRoles table with DeleteAsync
                 var result = await roleManager.DeleteAsync(role);
 
                 if (result.Succeeded)
@@ -303,10 +316,13 @@ namespace LPLMVC.Controllers
         {
             if (ModelState.IsValid)
             {
+                //Role Name
                 IdentityRole identityRole = new IdentityRole()
                 {
                     Name = model.RoleName
                 };
+
+                //Saves Role Name in the AspNetRoles table
                 IdentityResult result = await roleManager.CreateAsync(identityRole);
 
                 if (result.Succeeded)
@@ -327,6 +343,7 @@ namespace LPLMVC.Controllers
         [HttpGet]
         public IActionResult ListRoles()
         {
+            //Passes the roles from RoleManager to ListRoles View 
             var roles = roleManager.Roles;
             return View(roles);
         }
@@ -348,14 +365,17 @@ namespace LPLMVC.Controllers
                 RoleName = role.Name
             };
 
+            //Gather all registered users
             foreach (var user in userManager.Users)
             {
+                //If the user in this role, add the username to Users in EditRoleModel
                 if(await userManager.IsInRoleAsync(user, role.Name))
                 {
                     model.Users.Add(user.UserName);
                 }
             }
 
+            //Display the model object in the EditRole View
             return View(model);
         }
 
@@ -374,6 +394,7 @@ namespace LPLMVC.Controllers
             {
                 role.Name = model.RoleName;
 
+                //Update RoleName using UpdateAsync
                 var result = await roleManager.UpdateAsync(role);
 
                 if (result.Succeeded)
@@ -390,11 +411,13 @@ namespace LPLMVC.Controllers
 
         }
 
+        //RoleID is passed from the URL to the action
         [HttpGet]
         public async Task<IActionResult> EditUsersInRole(string roleId)
         {
             ViewBag.roleId = roleId;
 
+            //Find role by RoleID
             var role = await roleManager.FindByIdAsync(roleId);
 
             if (role == null)
@@ -405,6 +428,7 @@ namespace LPLMVC.Controllers
 
             var model = new List<RolesUsersModel>();
 
+            //Retrieves the UserId and UserName for all users in the role
             foreach(var user in userManager.Users)
             {
                 var userRoleModel = new RolesUsersModel
@@ -413,6 +437,7 @@ namespace LPLMVC.Controllers
                     UserName = user.UserName
                 };
 
+                //Add/remove users from the role
                 if (await userManager.IsInRoleAsync(user, role.Name))
                 {
                     userRoleModel.IsSelected = true;
@@ -426,12 +451,15 @@ namespace LPLMVC.Controllers
                 model.Add(userRoleModel);
             }
 
+            //Display the model object in the EditUsersInRole View
             return View(model);
         }
 
+        //This action responds to HttpPost and receives RolesUsersModel
         [HttpPost]
         public async Task<IActionResult> EditUsersInRole(List<RolesUsersModel> model, string roleId)
         {
+            //Find role by RoleID
             var role = await roleManager.FindByIdAsync(roleId);
 
             if (role == null)
@@ -463,6 +491,7 @@ namespace LPLMVC.Controllers
                 {
                     if (i < (model.Count - 1))
                     {
+                        
                         continue;
                     }
 
