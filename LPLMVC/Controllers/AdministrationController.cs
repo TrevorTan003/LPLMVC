@@ -98,7 +98,7 @@ namespace LPLMVC.Controllers
 
             return RedirectToAction("EditUser", new { Id = model.UserId });
 
-        }s
+        }
 
         [HttpGet]
         public async Task<IActionResult> ManageUserRoles(string userId)
