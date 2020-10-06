@@ -1,5 +1,6 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model IEnumerable<LPLMVC.Models.TeamDataModel>
+@{
+    ViewBag.Title = "Home";
 }
 
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -11,25 +12,25 @@
     <div class="carousel-inner">
         <div class="carousel-item active">
             <a href="#Details">
-                <img class="d-block w-100" src="https://i.imgur.com/nMPK14n.png" style="width:1000px; height:500px" alt="First slide">
+                <img class="d-block w-100" src="~/Images/Mirana.jpg" style="width:1000px; height:500px" alt="First slide">
                 <div class="carousel-caption d-none d-md-block">
-                    <h5 class="text-light">Be in to win $3700 AUD</h5>
-                    <p class="text-light">This year's competition is a step up from last year's, we have a prize pool of $3700 AUD and the tournament will be fiercer than ever before.</p>
+                    <h5 class="text-light">$5570 AUD Prize Pool</h5>
+                    <p class="text-light">This year's second season of Dota 2 has a $5570 AUD prize pool.</p>
                 </div>
             </a>
         </div>
         <div class="carousel-item">
             <a href="#About">
-                <img class="d-block w-100" src="https://i.insider.com/5b7e9f3089c8a1d9218b48b6?width=1100&format=jpeg&auto=webp" style="width:1000px; height:500px" alt="Second slide">
+                <img class="d-block w-100" src="~/Images/Storm Spirit.jpg" style="width:1000px; height:500px" alt="Second slide">
                 <div class="carousel-caption d-none d-md-block">
-                    <h5 class="text-light">Go Pro</h5>
-                    <p class="text-light">The winning team will continue to go up against the best highschools from all across Australia. Fight hard and you'll reap more rewards and gain recognition from professional teams.</p>
+                    <h5 class="text-light">Open Division</h5>
+                    <p class="text-light">Fight hard and you'll reap more rewards and gain recognition from professional teams.</p>
                 </div>
             </a>
         </div>
         <div class="carousel-item">
             <a href="#Rules">
-                <img class="d-block w-100" src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/blog/play/dota_heroes.png" style="width:1000px; height:500px" alt="Third slide">
+                <img class="d-block w-100" src="~/Images/Dota 2.jpg" style="width:1000px; height:500px" alt="Third slide">
                 <div class="carousel-caption d-none d-md-block">
                     <h5 class="text-light">Rules</h5>
                     <p class="text-light">Make sure you and your team follows the tournament's rules. Failure to do so may result in disqualification.</p>
@@ -50,47 +51,163 @@
 <div class="flex-sm-row-reverse card">
     <div class="card-body">
         <div id="About">
-            <h3 class="text-dark"><b>2020 LPL Dota 2 Tournament</b></h3>
+            <h3 class="text-dark"><b>2020 Season 2 LPL Dota 2 Tournament</b></h3>
             <p class="text-dark">
-                LPL welcomes you and your school to participate in this year's Dota 2 Tournament. To enter the tournament you're required to register your account and add your team
-                to the tournament. There will be a maximum of 20 teams so be sure to apply quickly. By competing in this tournament you and your team will have a chance of winning
-                prizes and the team that achieves first place will continue to play against schools all across Australia for the chance to win $3700 AUD.
+                LPL welcomes you and your school to participate in season 2 of this year's Dota 2 Tournament. To enter the tournament
+                you're required to register your account and add your team
+                to the tournament. By competing in this tournament you and your team will have a chance of winning $5570 AUD.
             </p>
             <br />
             <hr />
         </div>
         <div id="Details">
-            <h3 class="text-dark"><b>Tournament Details:</b></h3>
+            <h3 class="text-dark"><b>Prizes:</b></h3>
             <p class="text-dark"></p>
-            <table class="table table-sm flex-sm-grow-0 col-sm-11">
+
+            <h5><u>Open Division:</u></h5>
+            <table class="table table-sm table-striped">
                 <thead>
                     <tr>
-                        <th scope="col">Placement</th>
-                        <th scope="col">Prize</th>
+                        <th>Place</th>
+                        <td>1st</td>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <th scope="row">1</th>
-                        <td>$2500</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>$700</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>$500</td>
+                        <th>Prize</th>
+                        <td>$120</td>
                     </tr>
                 </tbody>
             </table>
-            <div class="container text-center align-content-center" style="width:500px">
-                <a asp-action="Index" asp-controller="Team" class="btn btn-primary text-light">Register Your Team</a>
-            </div>
             <br />
+
+            <h5><u>Amateur Division:</u></h5>
+            <table class="table table-sm table-striped">
+                <thead>
+                    <tr>
+                        <th>Place</th>
+                        <td>1st</td>
+                        <td>2nd</td>
+                        <td>3rd</td>
+                        <td>4th</td>
+                        <td>5th</td>
+                        <td>6th</td>
+                        <td>7th</td>
+                        <td>8th</td>
+                        <td>Total</td>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>Prize</th>
+                        <td>$300</td>
+                        <td>$250</td>
+                        <td>$200</td>
+                        <td>$200</td>
+                        <td>$150</td>
+                        <td>$150</td>
+                        <td>$150</td>
+                        <td>$150</td>
+                        <td>$1550</td>
+                    </tr>
+                </tbody>
+            </table>
+            <br />
+
+            <h5><u>Pro Division:</u></h5>
+            <table class="table table-sm table-striped">
+                <thead>
+                    <tr>
+                        <th>Place</th>
+                        <td>1st</td>
+                        <td>2nd</td>
+                        <td>3rd</td>
+                        <td>4th</td>
+                        <td>5th</td>
+                        <td>6th</td>
+                        <td>7th</td>
+                        <td>8th</td>
+                        <td>Total</td>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>Prize</th>
+                        <td>$1000</td>
+                        <td>$700</td>
+                        <td>$500</td>
+                        <td>$500</td>
+                        <td>$300</td>
+                        <td>$300</td>
+                        <td>$300</td>
+                        <td>$300</td>
+                        <td>$3900</td>
+                    </tr>
+                </tbody>
+            </table>
+            <br />
+            <hr />
+
+            <h3><b>Tournament Details:</b></h3>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.SchoolName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Wins)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Games)
+                        </th>
+                        <th>
+                            <a asp-action="Create" asp-controller="Team" class="btn btn-primary text-light">Create New</a>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SchoolName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Wins)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Games)
+                            </td>
+                            <td>
+                                @if (User.IsInRole("User, Admin"))
+                                {
+                                    <a asp-action="Edit" asp-controller="Team" asp-route-id="@item.TeamId">Edit  |</a>
+                                }
+                                else if (User.IsInRole("Admin"))
+                                {
+                                    <a asp-action="Delete" asp-controller="Team" asp-route-id="@item.TeamId">Delete  |</a>
+                                }
+
+                                <a asp-action="Details" asp-controller="Team" asp-route-id="@item.TeamId">Details</a>
+
+
+
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
         </div>
     </div>
 </div>
+<br />
+
 
 
 
