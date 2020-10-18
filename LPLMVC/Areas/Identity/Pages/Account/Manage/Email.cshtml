@@ -1,7 +1,4 @@
 ﻿@page
-
-@inject SignInManager<LPLMVCUser> SignInManager
-
 @model EmailModel
 @{
     ViewData["Title"] = "Manage Email";
@@ -25,7 +22,7 @@
                         </div>
                     </div>
                 }
-                else
+                 else
                 {
                     <input asp-for="Email" class="form-control" disabled />
                     <button id="email-verification" type="submit" asp-page-handler="SendVerificationEmail" class="btn btn-link">Send verification email</button>
@@ -37,10 +34,6 @@
                 <span asp-validation-for="Input.NewEmail" class="text-danger"></span>
             </div>
             <button id="change-email-button" type="submit" asp-page-handler="ChangeEmail" class="btn btn-primary">Change email</button>
-            @if (SignInManager.IsSignedIn(User) && !Model.IsEmailConfirmed)
-            {
-                <button type="submit" asp-page-handler="EmailVerificationAsync" class="btn btn-primary">Verify Email</button>
-            }
         </form>
     </div>
 </div>

@@ -39,7 +39,6 @@ namespace LPLMVC.Areas.Identity.Pages.Account.Manage
         public string Email { get; set; }
 
         public bool IsEmailConfirmed { get; set; }
-        public string ReturnUrl { get; set; }
 
         [TempData]
         public string StatusMessage { get; set; }
@@ -104,44 +103,14 @@ namespace LPLMVC.Areas.Identity.Pages.Account.Manage
                     pageHandler: null,
                     values: new { userId = userId, email = Input.NewEmail, code = code },
                     protocol: Request.Scheme);
-                await _emailSender.SendEmailAsync(
-                    Input.NewEmail,
-                    "Confirm your email",
-                    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+                _logger.Log(LogLevel.Warning, callbackUrl);
 
                 StatusMessage = "Confirmation link to change email sent. Please check your email.";
                 return RedirectToPage();
             }
 
             StatusMessage = "Your email is unchanged.";
-            return RedirectToPage();
-        }
-
-        public async Task<IActionResult> EmailVerificationAsync()
-        {
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null)
-            {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
-            }
-
-            if (!ModelState.IsValid)
-            {
-                await LoadAsync(user);
-                return Page();
-            }
-
-            var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-
-            //Creates Url for the email confirmation
-            var emailConfirmationLink = Url.Page(
-                "/Account/ResetPassword",
-                pageHandler: null,
-                values: new { area = "Identity", code },
-                protocol: Request.Scheme);
-
-            _logger.Log(LogLevel.Warning, emailConfirmationLink);
-
             return RedirectToPage();
         }
 
@@ -161,19 +130,21 @@ namespace LPLMVC.Areas.Identity.Pages.Account.Manage
 
             var userId = await _userManager.GetUserIdAsync(user);
             var email = await _userManager.GetEmailAsync(user);
+
+            //Generates token for confirming email
             var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
             code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+
             var callbackUrl = Url.Page(
                 "/Account/ConfirmEmail",
                 pageHandler: null,
                 values: new { area = "Identity", userId = userId, code = code },
                 protocol: Request.Scheme);
-            await _emailSender.SendEmailAsync(
-                email,
-                "Confirm your email",
-                $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
-            StatusMessage = "Verification email sent. Please check your email.";
+            //Logs it to a text file
+            _logger.Log(LogLevel.Warning, callbackUrl);
+
+            StatusMessage = "Verification link has been logged, check the Logs folder.";
             return RedirectToPage();
         }
     }
