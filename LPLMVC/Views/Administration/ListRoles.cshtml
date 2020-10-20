@@ -7,9 +7,11 @@
 <h1>All Roles</h1>
 <hr />
 
+
 @if (Model.Any())
 {
-    <a class="text-light btn btn-primary mb-3" asp-action="CreateRole" asp-controller="Administration">Add Role</a>
+    <a class="text-light btn btn-primary mb-3" style="width:auto" 
+       asp-action="CreateRole" asp-controller="Administration">Add Role</a>
 
     foreach (var role in Model)
     {

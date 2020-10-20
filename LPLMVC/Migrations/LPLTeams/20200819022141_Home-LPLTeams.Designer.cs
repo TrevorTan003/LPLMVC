@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LPLMVC.Migrations.LPLTeams
 {
     [DbContext(typeof(LPLTeamsContext))]
-    [Migration("20200908212248_TeamMigrate2")]
-    partial class TeamMigrate2
+    [Migration("20200819022141_Home-LPLTeams")]
+    partial class HomeLPLTeams
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,29 +32,29 @@ namespace LPLMVC.Migrations.LPLTeams
 
                     b.Property<string>("Player1")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(250)");
 
                     b.Property<string>("Player2")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(250)");
 
                     b.Property<string>("Player3")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(250)");
 
                     b.Property<string>("Player4")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(250)");
 
                     b.Property<string>("Player5")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(250)");
 
                     b.Property<string>("Player6")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(250)");
 
                     b.Property<string>("Player7")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(250)");
 
                     b.Property<string>("SchoolName")
                         .IsRequired()

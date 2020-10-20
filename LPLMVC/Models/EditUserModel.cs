@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Authorization.Infrastructure;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace LPLMVC.Models
     {
         public EditUserModel()
         {
-            Claims = new List<string>();
+            Claims = new List<string>(); 
             Roles = new List<string>();
         }
 
@@ -24,5 +25,6 @@ namespace LPLMVC.Models
 
         public List<string> Claims { get; set; }
         public IList<string> Roles { get; set; }
+           
     }
 }
