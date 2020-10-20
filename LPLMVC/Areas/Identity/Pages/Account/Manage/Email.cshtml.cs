@@ -97,13 +97,18 @@ namespace LPLMVC.Areas.Identity.Pages.Account.Manage
             if (Input.NewEmail != email)
             {
                 var userId = await _userManager.GetUserIdAsync(user);
+
+                //Generates token for changing email
                 var code = await _userManager.GenerateChangeEmailTokenAsync(user, Input.NewEmail);
+
+                //Generates link for changing email
                 var callbackUrl = Url.Page(
                     "/Account/ConfirmEmailChange",
                     pageHandler: null,
                     values: new { userId = userId, email = Input.NewEmail, code = code },
                     protocol: Request.Scheme);
 
+                //Logs it to a text file
                 _logger.Log(LogLevel.Warning, callbackUrl);
 
                 StatusMessage = "Confirmation link to change email sent. Please check your email.";
@@ -141,7 +146,7 @@ namespace LPLMVC.Areas.Identity.Pages.Account.Manage
                 values: new { area = "Identity", userId = userId, code = code },
                 protocol: Request.Scheme);
 
-            //Logs it to a text file
+            //Logs confirm email URL to a text file
             _logger.Log(LogLevel.Warning, callbackUrl);
 
             StatusMessage = "Verification link has been logged, check the Logs folder.";
