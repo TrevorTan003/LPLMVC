@@ -83,6 +83,7 @@ namespace LPLMVC.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
+                    //Adds the user to the user role once they've successfully registered
                     await _userManager.AddToRoleAsync(user, "User");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
