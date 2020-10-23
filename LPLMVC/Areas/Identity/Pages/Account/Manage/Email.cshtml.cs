@@ -43,26 +43,11 @@ namespace LPLMVC.Areas.Identity.Pages.Account.Manage
         [TempData]
         public string StatusMessage { get; set; }
 
-        [BindProperty]
-        public InputModel Input { get; set; }
-
-        public class InputModel
-        {
-            [Required]
-            [EmailAddress]
-            [Display(Name = "New email")]
-            public string NewEmail { get; set; }
-        }
 
         private async Task LoadAsync(LPLMVCUser user)
         {
             var email = await _userManager.GetEmailAsync(user);
             Email = email;
-
-            Input = new InputModel
-            {
-                NewEmail = email,
-            };
 
             IsEmailConfirmed = await _userManager.IsEmailConfirmedAsync(user);
         }
@@ -79,45 +64,6 @@ namespace LPLMVC.Areas.Identity.Pages.Account.Manage
             return Page();
         }
 
-        public async Task<IActionResult> OnPostChangeEmailAsync()
-        {
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null)
-            {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
-            }
-
-            if (!ModelState.IsValid)
-            {
-                await LoadAsync(user);
-                return Page();
-            }
-
-            var email = await _userManager.GetEmailAsync(user);
-            if (Input.NewEmail != email)
-            {
-                var userId = await _userManager.GetUserIdAsync(user);
-
-                //Generates token for changing email
-                var code = await _userManager.GenerateChangeEmailTokenAsync(user, Input.NewEmail);
-
-                //Generates link for changing email
-                var callbackUrl = Url.Page(
-                    "/Account/ConfirmEmailChange",
-                    pageHandler: null,
-                    values: new { userId = userId, email = Input.NewEmail, code = code },
-                    protocol: Request.Scheme);
-
-                //Logs it to a text file
-                _logger.Log(LogLevel.Warning, callbackUrl);
-
-                StatusMessage = "Confirmation link to change email sent. Please check your email.";
-                return RedirectToPage();
-            }
-
-            StatusMessage = "Your email is unchanged.";
-            return RedirectToPage();
-        }
 
         public async Task<IActionResult> OnPostSendVerificationEmailAsync()
         {
