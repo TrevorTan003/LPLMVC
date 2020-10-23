@@ -48,7 +48,7 @@
     </a>
 </div>
 <br />
-<div class="flex-sm-row-reverse card">
+<div class="card">
     <div class="card-body">
         <div id="About">
             <h3 class="text-dark"><b>2020 Season 2 LPL Dota 2 Tournament</b></h3>
@@ -183,7 +183,7 @@
                                 @Html.DisplayFor(modelItem => item.Games)
                             </td>
                             <td>
-                                @if (User.IsInRole("User, Admin"))
+                                @if (User.IsInRole("User, Admin") && User.HasClaim("Edit Teaem", "Edit Team"))
                                 {
                                     <a asp-action="Edit" asp-controller="Team" asp-route-id="@item.TeamId">Edit  |</a>
                                 }

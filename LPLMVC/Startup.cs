@@ -12,6 +12,8 @@ using Microsoft.EntityFrameworkCore;
 using LPLMVC.Data;
 using LPLMVC.Models;
 using Microsoft.Extensions.Options;
+using LPLMVC.Areas.Identity.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace LPLMVC
 {
@@ -27,6 +29,13 @@ namespace LPLMVC
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<LPLMVCContext>(options =>
+                   options.UseSqlServer(
+                         Configuration.GetConnectionString("LPLMVCContextConnection")));
+
+            services.AddDefaultIdentity<LPLMVCUser>(options => options.SignIn.RequireConfirmedAccount = false)
+                .AddRoles<IdentityRole>().AddEntityFrameworkStores<LPLMVCContext>();
+
             services.AddControllersWithViews();
             services.AddRazorPages();
 

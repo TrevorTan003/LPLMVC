@@ -55,7 +55,8 @@ namespace LPLMVC.Controllers
         [Authorize(Policy = "CreateTeamPolicy")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("TeamId,SchoolName,Player1,Player2,Player3,Player4,Player5,Player6,Player7")] TeamDataModel teamDataModel)
+        public async Task<IActionResult> Create([Bind("TeamId,SchoolName,Player1,Player2,Player3,Player4," +
+            "Player5,Player6,Player7")] TeamDataModel teamDataModel)
         {
             if (ModelState.IsValid)
             {
@@ -87,7 +88,8 @@ namespace LPLMVC.Controllers
         [Authorize(Policy = "EditTeamPolicy")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("TeamId,SchoolName,Player1,Player2,Player3,Player4,Player5,Player6,Player7,Wins,Games")] TeamDataModel teamDataModel)
+        public async Task<IActionResult> Edit(int id, [Bind("TeamId,SchoolName,Player1,Player2,Player3,Player4," +
+            "Player5,Player6,Player7,Wins,Games")] TeamDataModel teamDataModel)
         {
             if (id != teamDataModel.TeamId)
             {
