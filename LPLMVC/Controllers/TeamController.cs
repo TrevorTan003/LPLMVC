@@ -20,13 +20,13 @@ namespace LPLMVC.Controllers
             _context = context;
         }
 
-        // GET: Team
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             return View(await _context.TeamDataModels.ToListAsync());
         }
 
-        // GET: Team/Details/5
+        [HttpGet]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -44,14 +44,13 @@ namespace LPLMVC.Controllers
             return View(teamDataModel);
         }
 
-        // GET: Team/Create
+        [HttpGet]
         [Authorize(Policy = "CreateTeamPolicy")]
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Team/Create
         [Authorize(Policy = "CreateTeamPolicy")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -67,7 +66,6 @@ namespace LPLMVC.Controllers
             return View(teamDataModel);
         }
 
-        // GET: Team/Edit/5
         [Authorize(Policy = "EditTeamPolicy")]
         public async Task<IActionResult> Edit(int? id)
         {
@@ -84,7 +82,6 @@ namespace LPLMVC.Controllers
             return View(teamDataModel);
         }
 
-        // POST: Team/Edit/5
         [Authorize(Policy = "EditTeamPolicy")]
         [HttpPost]
         [ValidateAntiForgeryToken]

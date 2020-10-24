@@ -45,10 +45,10 @@ namespace LPLMVC.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = await _userManager.FindByEmailAsync(Input.Email);
-                if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
+                if (user == null)
                 {
                     // Don't reveal that the user does not exist or is not confirmed
-                    return RedirectToPage("./ForgotPasswordConfirmation");
+                    return RedirectToPage("./ForgotPasswordConfirmation");  
                 }
 
                 //Generates token for password reset
@@ -65,7 +65,7 @@ namespace LPLMVC.Areas.Identity.Pages.Account
                 //Logs the URL for password reset into a text file
                 logger.Log(LogLevel.Warning, callbackUrl);
 
-                return RedirectToPage("./ForgotPasswordConfirmation");
+                return RedirectToPage("./ForgotPasswordConfirmation", new { email = Input.Email, returnUrl = callbackUrl });
             }
 
             return Page();

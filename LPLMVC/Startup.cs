@@ -29,17 +29,20 @@ namespace LPLMVC
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //DbContext for AspNet tables 
             services.AddDbContext<LPLMVCContext>(options =>
                    options.UseSqlServer(
                          Configuration.GetConnectionString("LPLMVCContextConnection")));
 
+            //Services for Identity
             services.AddDefaultIdentity<LPLMVCUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddRoles<IdentityRole>().AddEntityFrameworkStores<LPLMVCContext>();
 
+            //Services for adding pages
             services.AddControllersWithViews();
             services.AddRazorPages();
 
-            //DbContext For TeamsContext
+            //DbContext For TeamDataModels
             services.AddDbContext<LPLTeamsContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("LPLMVCContextConnection")));
 
@@ -67,7 +70,6 @@ namespace LPLMVC
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
