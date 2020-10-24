@@ -16,12 +16,6 @@ namespace LPLMVC.Areas.Identity
         public void Configure(IWebHostBuilder builder)
         {
             builder.ConfigureServices((context, services) => {
-                services.AddDbContext<LPLMVCContext>(options =>
-                    options.UseSqlServer(
-                        context.Configuration.GetConnectionString("LPLMVCContextConnection")));
-
-                services.AddDefaultIdentity<LPLMVCUser>(options => options.SignIn.RequireConfirmedAccount = false)
-                    .AddRoles<IdentityRole>().AddEntityFrameworkStores<LPLMVCContext>();
             });
         }
     }

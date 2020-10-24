@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Extensions.Logging;
 
 namespace LPLMVC.Areas.Identity.Pages.Account
 {
@@ -19,11 +20,14 @@ namespace LPLMVC.Areas.Identity.Pages.Account
     {
         private readonly UserManager<LPLMVCUser> _userManager;
         private readonly IEmailSender _emailSender;
+        private readonly ILogger<ForgotPasswordModel> logger;
 
-        public ForgotPasswordModel(UserManager<LPLMVCUser> userManager, IEmailSender emailSender)
+        public ForgotPasswordModel(UserManager<LPLMVCUser> userManager, IEmailSender emailSender
+            ,ILogger<ForgotPasswordModel> logger)
         {
             _userManager = userManager;
             _emailSender = emailSender;
+            this.logger = logger;
         }
 
         [BindProperty]
@@ -41,15 +45,16 @@ namespace LPLMVC.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = await _userManager.FindByEmailAsync(Input.Email);
-                if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
+                if (user == null)
                 {
                     // Don't reveal that the user does not exist or is not confirmed
-                    return RedirectToPage("./ForgotPasswordConfirmation");
+                    return RedirectToPage("./ForgotPasswordConfirmation");  
                 }
 
-                // For more information on how to enable account confirmation and password reset please 
-                // visit https://go.microsoft.com/fwlink/?LinkID=532713
+                //Generates token for password reset
                 var code = await _userManager.GeneratePasswordResetTokenAsync(user);
+
+                //Generates the URL for the password resett
                 code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                 var callbackUrl = Url.Page(
                     "/Account/ResetPassword",
@@ -57,16 +62,13 @@ namespace LPLMVC.Areas.Identity.Pages.Account
                     values: new { area = "Identity", code },
                     protocol: Request.Scheme);
 
-                await _emailSender.SendEmailAsync(
-                    Input.Email,
-                    "Reset Password",
-                    $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                //Logs the URL for password reset into a text file
+                logger.Log(LogLevel.Warning, callbackUrl);
 
-                return RedirectToPage("./ForgotPasswordConfirmation");
+                return RedirectToPage("./ForgotPasswordConfirmation", new { email = Input.Email, returnUrl = callbackUrl });
             }
 
             return Page();
-
         }
     }
 }
