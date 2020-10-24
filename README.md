@@ -14,5 +14,6 @@ The web application is required to have a landing page that communicates ideas a
 
 ## Installation
 1. Download the code
-2. Open LPLMVC solution
-3. Run the web app using IIS Express
+2. Extract the folder
+3. Open LPLMVC solution
+4. Run the web app using IIS Express
