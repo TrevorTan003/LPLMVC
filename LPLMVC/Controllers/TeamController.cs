@@ -21,12 +21,6 @@ namespace LPLMVC.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.TeamDataModels.ToListAsync());
-        }
-
-        [HttpGet]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
