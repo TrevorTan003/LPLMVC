@@ -28,7 +28,7 @@ namespace LPLMVC.Areas.Identity.Pages.Account
             await _signInManager.SignOutAsync();
             _logger.LogInformation("User logged out.");
 
-                return RedirectToAction("Home", "Index");
+                return RedirectToAction("Index", "Home");
         }
     }
 }
