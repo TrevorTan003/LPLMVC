@@ -55,7 +55,7 @@ namespace LPLMVC.Controllers
             {
                 _context.Add(teamDataModel);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Home");
             }
             return View(teamDataModel);
         }
@@ -105,7 +105,7 @@ namespace LPLMVC.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Home");
             }
             return View(teamDataModel);
         }
@@ -138,7 +138,7 @@ namespace LPLMVC.Controllers
             var teamDataModel = await _context.TeamDataModels.FindAsync(id);
             _context.TeamDataModels.Remove(teamDataModel);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", "Home");
         }
 
         private bool TeamDataModelExists(int id)
