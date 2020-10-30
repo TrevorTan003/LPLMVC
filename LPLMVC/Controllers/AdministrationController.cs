@@ -478,7 +478,7 @@ namespace LPLMVC.Controllers
                 {
                     result = await userManager.AddToRoleAsync(user, role.Name);
                 }
-                else if (!(model[i].IsSelected && !(await userManager.IsInRoleAsync(user, role.Name))))
+                else if (!(model[i].IsSelected && (await userManager.IsInRoleAsync(user, role.Name))))
                 {
                     result = await userManager.RemoveFromRoleAsync(user, role.Name);
                 }
