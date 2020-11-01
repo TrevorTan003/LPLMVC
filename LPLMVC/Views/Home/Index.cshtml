@@ -183,7 +183,7 @@
                                 @Html.DisplayFor(modelItem => item.Games)
                             </td>
                             <td>
-                                @if (User.IsInRole("User, Admin") && User.HasClaim("Edit Teaem", "Edit Team"))
+                                @if (User.IsInRole("User, Admin") && User.HasClaim("Edit Team", "Edit Team"))
                                 {
                                     <a asp-action="Edit" asp-controller="Team" asp-route-id="@item.TeamId">Edit  |</a>
                                 }
